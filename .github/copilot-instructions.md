@@ -2,6 +2,28 @@
 
 WoW addon displaying Blizzard's Assisted Combat suggestions with keybinds. Lua + WoW API + Ace3.
 
+## Version Detection & Compatibility
+
+**WoW 12.0 (Midnight) compatibility layer ready** - Use version conditionals for breaking API changes:
+
+```lua
+local BlizzardAPI = LibStub("JustAC-BlizzardAPI", true)
+
+-- Check version
+if BlizzardAPI.IsMidnightOrLater() then
+    -- 12.0+ code path (new/fixed API)
+else
+    -- Pre-12.0 code path (original API)
+end
+```
+
+**When to add version conditionals:**
+- 12.0 error reported → Add conditional fix
+- API behavior changes between versions → Wrap in version check
+- New API replaces old → Keep both paths with version guard
+
+**See:** `Documentation/VERSION_CONDITIONALS.md` for detailed patterns and examples
+
 ## Critical Workflow
 
 1. **NEVER guess WoW API behavior** — Verify with `/script` commands in-game or check `R:\WOW\00-SOURCE\WowUISource`
